@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "conFusion": {
+    "ReadARs": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/conFusion",
+            "outputPath": "dist/ReadARs",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -57,18 +57,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "conFusion:build"
+            "browserTarget": "ReadARs:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "conFusion:build:production"
+              "browserTarget": "ReadARs:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "conFusion:build"
+            "browserTarget": "ReadARs:build"
           }
         },
         "test": {
@@ -105,7 +105,7 @@
         }
       }
     },
-    "conFusion-e2e": {
+    "ReadARs-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -113,11 +113,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "conFusion:serve"
+            "devServerTarget": "ReadARs:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "conFusion:serve:production"
+              "devServerTarget": "ReadARs:serve:production"
             }
           }
         },
@@ -133,5 +133,5 @@
       }
     }
   },
-  "defaultProject": "conFusion"
+  "defaultProject": "ReadARs"
 }

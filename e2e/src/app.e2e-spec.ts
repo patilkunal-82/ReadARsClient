@@ -8,9 +8,9 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display message saying Ristorante Con Fusion', () => {
+  it('should display message saying ReadARs', () => {
     page.navigateTo('/');
-    expect(page.getParagraphText('app-root h1')).toEqual('Ristorante Con Fusion');
+    expect(page.getParagraphText('app-root h1')).toEqual('ReadARs');
   });
 
   it('should navigate to about us page by clicking on the link', () => {
@@ -22,8 +22,8 @@ describe('workspace-project App', () => {
     expect(page.getParagraphText('h3')).toBe('About Us');
   });
 
-  it('should enter a new comment for the first dish', () => {
-    page.navigateTo('/dishdetail/0');
+  it('should enter a new comment for the first book', () => {
+    page.navigateTo('/bookdetail/0');
 
     const newAuthor = page.getElement('input[type=text]');
     newAuthor.sendKeys('Test Author');

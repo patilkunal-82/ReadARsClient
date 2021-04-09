@@ -1,8 +1,14 @@
 $lt-gray: #ddd;
-$background-dark: #512DA8;
-$background-light: #9575CD;
-$background-pale: #D1C4E9;
-$background-moredark: #4527A0;
+//$background-dark: #3F51B5;
+//$background-light: #7986CB;
+//$background-pale: #C5CAE9;
+//$background-moredark: #1A237E;
+
+$background-pale: #C8E6C9;
+$background-light: #81C784;
+$background-dark: #4CAF50;
+$background-moredark: #1B5E20;
+
 
 @mixin zero-margin($pad-up-down, $pad-left-right) {
     margin: 0px auto;
@@ -10,11 +16,15 @@ $background-moredark: #4527A0;
 }
 
 .jumbotron {
-    @include zero-margin(70px,30px);
-    background: $background-light ;
-    color:floralwhite;
-    min-height: 150px;
+    @include zero-margin(20px,20px);
+    background: $background-dark ;
+    color:white;
+    min-height: 50px;
 }
 .active {
     background: $background-moredark;
+}
+
+.mat-toolbar.mat-primary {
+  background: $background-moredark;
 }

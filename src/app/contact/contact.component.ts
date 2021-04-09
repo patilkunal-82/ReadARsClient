@@ -27,11 +27,23 @@ export class ContactComponent implements OnInit {
   submitted = null;
   showForm = true;
 
+
+  agree: boolean;
+  contacttype: string;
+  message: string;
+  rating: string;
+
+
   formErrors = {
     'firstname': '',
     'lastname': '',
     'telnum': '',
-    'email': ''
+    'email': '',
+    'agree': '',
+    'contacttype':'',
+    'rating': '',
+    'message':''
+
   };
 
   validationMessages = {
@@ -53,6 +65,17 @@ export class ContactComponent implements OnInit {
       'required':      'Email is required.',
       'email':         'Email not in valid format.'
     },
+    'contacttype': {
+      'required':      'Contact Type is required.'
+    },
+    'rating': {
+      'required':      'Rating is required.'
+    },
+    'message': {
+      'required':      'Last Name is required.',
+      'minlength':     'Last Name must be at least 4 characters long.',
+      'maxlength':     'Last Name cannot be more than 50 characters long.'
+    }
   };
 
   constructor(private fb: FormBuilder,
@@ -71,6 +94,7 @@ export class ContactComponent implements OnInit {
       email: ['', [Validators.required, Validators.email] ],
       agree: false,
       contacttype: 'None',
+      rating: '5',
       message: ''
     });
 
@@ -118,6 +142,7 @@ export class ContactComponent implements OnInit {
       email: '',
       agree: false,
       contacttype: 'None',
+      rating: '5',
       message: ''
     });
     this.feedbackFormDirective.resetForm();

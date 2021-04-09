@@ -4,5 +4,6 @@ export class User {
     firstname: string;
     lastname: string;
     facebookId: string;
+    email: string;
     admin: boolean;
 }

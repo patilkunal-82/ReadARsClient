@@ -33,7 +33,7 @@ export class AuthService {
    }
 
    checkJWTtoken() {
-     this.http.get<JWTResponse>(baseURL + 'users/checkJWTtoken')
+     this.http.get<JWTResponse>(baseURL + 'users/checkJWTToken')
      .subscribe(res => {
        console.log('JWT Token Valid: ', res);
        this.sendUsername(res.user.username);
@@ -82,7 +82,14 @@ export class AuthService {
      localStorage.removeItem(this.tokenKey);
    }
 
-   signUp() {
+   signUp(newuser: any): Observable<any> {
+     return this.http.post<AuthResponse>(baseURL + 'users/signup',
+       {'firstname': newuser.firstname, 'lastname': newuser.lastname,'username': newuser.username, 'password': newuser.password, 'email': newuser.email})
+       .pipe(map(res => {
+           this.storeUserCredentials({username: newuser.username, token: res.token});
+           return {'success': true, 'username': newuser.username, 'email':newuser.email };
+       }),
+        catchError(error => this.processHTTPMsgService.handleError(error)));
 
    }
 
@@ -98,6 +105,7 @@ export class AuthService {
 
    logOut() {
      this.destroyUserCredentials();
+     localStorage.removeItem('bookIds');
    }
 
    isLoggedIn(): Boolean {

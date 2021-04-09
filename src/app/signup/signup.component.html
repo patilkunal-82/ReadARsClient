@@ -1,0 +1,42 @@
+<mat-toolbar color="primary">
+    Create your ReadARs account
+  <span class="flex-spacer"></span>
+  <button mat-button mat-dialog-close>&times;</button>
+</mat-toolbar>
+
+ <div *ngIf="errMess">
+  <h2>Error</h2>
+  <h4>{{errMess}} </h4>
+</div>
+
+<form novalidate #signupForm="ngForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <p>
+      <mat-form-field>
+        <input matInput placeholder="First Name" type="text" [(ngModel)]="newuser.firstname" name="firstname"  #firstname="ngModel" required>
+        <mat-error *ngIf="username.errors?.required">First Name is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Last Name" type="text" [(ngModel)]="newuser.lastname" name="lastname"  #password="ngModel" required>
+        <mat-error *ngIf="username.errors?.required">Last Name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Username" type="text" [(ngModel)]="newuser.username" name="username"  #username="ngModel" required>
+        <mat-error *ngIf="username.errors?.required">Username is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Password" type="password" [(ngModel)]="newuser.password" name="password"  #password="ngModel" required>
+        <mat-error *ngIf="password.errors?.required">Password is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email" type="email" [(ngModel)]="newuser.email" name="email"  #username="ngModel" email required>
+        <mat-error *ngIf="username.errors?.required">Email is required</mat-error>
+      </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <span class="flex-spacer"></span>
+    <button mat-button mat-dialog-close> Cancel </button>
+    <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="signupForm.form.invalid"> Create </button>
+  </mat-dialog-actions>
+</form>

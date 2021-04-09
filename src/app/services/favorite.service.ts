@@ -40,6 +40,7 @@ export class FavoriteService {
   }
 
   postFavorite(id: string) {
+    
     return this.http.post(baseURL + 'favorites/' + id, {})
     .pipe(catchError(error => this.processHTTPMsgService.handleError(error)));
   }

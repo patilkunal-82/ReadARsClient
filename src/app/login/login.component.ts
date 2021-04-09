@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import { MatDialog, MatDialogRef} from '@angular/material';
 import { AuthService } from '../services/auth.service';
+import { SignupComponent } from '../signup/signup.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
 
   user = {username: '', password: '', remember: false};
   errMess: string;
 
-  constructor(public dialogRef: MatDialogRef<LoginComponent>,
+
+  constructor(public dialogRef: MatDialogRef<LoginComponent>, public dialog: MatDialog,
     private authService: AuthService) { }
 
   ngOnInit() {
@@ -33,4 +36,23 @@ export class LoginComponent implements OnInit {
         this.errMess = error;
       });
   }
+
+  openSignupForm() {
+
+    this.closeLoginForm();
+    console.log("inside sign up form via login component")
+    const signupRef = this.dialog.open(SignupComponent, {width: '500px', height: '450px'});
+
+    signupRef.afterClosed()
+      .subscribe(result => {
+        console.log(result);
+      });
+  }
+
+  closeLoginForm() {
+    this.dialogRef.close();
+  }
+
+
+
 }

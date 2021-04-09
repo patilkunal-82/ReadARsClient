@@ -1,0 +1,177 @@
+<div class="container"
+fxLayout="column"
+fxLayoutGap="10px">
+
+<div fxFlex>
+  <div fxLayout="row" fxLayoutAlign="none center">
+     <h3 fxFlex="60%">My books in the ReadARs Library</h3>
+     <span style="color: green;" class="fa fa-thumbs-up fa-lg"></span>
+     <mat-slide-toggle fxFlex [(ngModel)]="makeavailable" [color]="Primary"> Make it available </mat-slide-toggle>
+     <span class="flex-spacer-icons"></span>
+     <span style="color: blue;" class="fa fa-thumbs-up fa-lg"></span>
+     <mat-slide-toggle fxFlex [(ngModel)]="lend" [color]="Primary">Lend it</mat-slide-toggle>
+     <span class="flex-spacer-icons"></span>
+     <span style="color: red;" class="fa fa-trash fa-lg"></span>
+     <mat-slide-toggle fxFlex [(ngModel)]="delete" [color]="Warn"> Delete it ! </mat-slide-toggle>
+     <span class="flex-spacer-icons"></span>
+  </div>
+</div>
+<div fxFlex>
+<div fxLayout="row" fxLayoutAlign="none center">
+</div>
+</div>
+
+<mat-form-field>
+  <mat-label>Search</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Search book.." #input>
+</mat-form-field>
+<div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+         <ng-container matColumnDef="bookname">
+           <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Name </th>
+           <td mat-cell *matCellDef="let row"> {{row.bookname}} </td>
+         </ng-container>
+          <ng-container matColumnDef="booklanguage">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Language </th>
+            <td mat-cell *matCellDef="let row"> {{row.booklanguage}} </td>
+          </ng-container>
+          <ng-container matColumnDef="bookdescription">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+            <td mat-cell *matCellDef="let row"> {{row.bookdescription}} </td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Action: Lend, Make Available or Delete </th>
+              <td mat-cell  *matCellDef="let row">
+            <!--    <span [ngClass]="row.isAvailable == true ? 'hide': '' " style="color: red;" class="fa fa-times fa-lg"></span>
+                <span [ngClass]="row.isReserved == true || row.isBorrowed == true ? 'hide': '' " style="color: green;" class="fa fa-check-circle fa-lg"></span> -->
+                <button mat-icon-button  *ngIf="lend && row.isReserved && !row.isBorrowed && !row.isAvailable" (click)="lendBook(row._id)">
+                  <span style="color: blue;" class="fa fa-thumbs-up fa-lg"></span>
+                </button>
+                <button mat-icon-button *ngIf="delete && row.isAvailable" (click)="deleteBook(row._id)">
+                  <span style="color: red;" class="fa fa-trash fa-lg"></span>
+                </button>
+                <button mat-icon-button *ngIf="makeavailable && (row.isBorrowed || row.isReserved) && !row.isAvailable" (click)="releaseBook(row._id)">
+                  <span style="color: green;" class="fa fa-thumbs-up fa-lg"></span>
+                </button>
+
+              </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr class="mat-row" *matNoDataRow>
+           <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+          </tr>
+      </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <div [hidden]="books || errMess">
+        <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+    </div>
+    <div *ngIf="errMess">
+      <h2>Error</h2>
+      <h4>{{errMess}}</h4>
+    </div>
+</div>
+
+<!-- <div fxFlex *ngIf="books || errMess; else loading" [@expand]>
+<div fxFlex *ngIf="books" [@expand]>
+<mat-grid-list cols="5" rowHeight="50px">
+ <mat-grid-tile *ngFor="let book of books" [style.background]="'#C5CAE9'">
+   <mat-grid-tile-footer>
+     <h2 matLine> {{book.bookname | uppercase}} </h2>
+     <h2 matLine> {{book.booklanguage}} </h2>
+     <button mat-icon-button  *ngIf="lend && book.isReserved && !book.isBorrowed && !book.isAvailable" (click)="lendBook(book._id)">
+       <span style="color: blue;" class="fa fa-check-circle fa-lg"></span>
+     </button>
+     <p matLine>
+       <span>  </span>
+     </p>
+     <span class="flex-spacer"></span>
+     <button mat-icon-button *ngIf="delete" (click)="deleteBook(book._id)">
+       <span style="color: red;" class="fa fa-times fa-lg"></span>
+     </button>
+     <button mat-icon-button *ngIf="makeavailable && book.isBorrowed && !book.isAvailable" (click)="releaseBook(book._id)">
+       <span style="color: green;" class="fa fa-check-circle fa-lg"></span>
+     </button>
+   </mat-grid-tile-footer>
+ </mat-grid-tile>
+</mat-grid-list>
+</div>
+<div *ngIf="errMess">
+<h2>Error</h2>
+<h4>{{errMess}}</h4>
+</div>
+</div> -->
+
+
+<!-- Add new book -->
+
+<mat-accordion>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+        <mat-panel-title><h3> Click to add your book to ReadARs </h3></mat-panel-title>
+    </mat-expansion-panel-header>
+        <div  fxFlex fxFlexOffset="20px" class="form-size">
+
+                <!-- <p>{{ bookDetailsForm.value | json }} {{ bookDetailsForm.status | json }}</p> -->
+                <form novalidate [formGroup]="bookDetailsForm" #fform="ngForm" (ngSubmit)="onSubmit()" *ngIf="showForm" [@expand]>
+                  <p>
+                    <mat-form-field class="half-width" fxFlex="40">
+                      <input matInput formControlName="bookname" placeholder="Book Name" type="text" required>
+                      <mat-error *ngIf="formErrors.bookname">{{formErrors.bookname}}</mat-error>
+                    </mat-form-field>
+                  </p>
+                  <p>
+                    <mat-form-field class="half-width" fxFlex="40">
+                      <mat-select placeholder="Language" formControlName="booklanguage">
+                        <mat-option *ngFor="let blanguage of booklanguage" [value]="blanguage">
+                          {{blanguage }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </p>
+                  <p>
+                    <mat-form-field class="half-width" fxFlex="40">
+                      <textarea matInput formControlName="bookdescription" placeholder="Book Description & Rating" rows=8></textarea>
+                      <mat-error *ngIf="formErrors.bookdescription">{{formErrors.bookdescription}}</mat-error>
+                    </mat-form-field>
+                    <mat-slider min="1" max="5" step="1" thumbLabel tickInterval="1" name="rating" formControlName="bookrating"></mat-slider>
+                  </p>
+                  <p>
+                    <mat-form-field class="half-width" fxFlex="40">
+                      <textarea matInput formControlName="bookowneraddress" placeholder="Your Address" rows=8 address required></textarea>
+                      <mat-error *ngIf="formErrors.address">{{formErrors.bookowneraddress}}</mat-error>
+                    </mat-form-field>
+                  </p>
+                  <p>
+                    <mat-form-field class="half-width" fxFlex="40">
+                      <input matInput formControlName="bookownertelnum" placeholder="Your Contact Number" type="tel" pattern="[0-9]*" required>
+                      <mat-error *ngIf="formErrors.telnum">{{formErrors.bookownertelnum}}</mat-error>
+                    </mat-form-field>
+                  </p>
+                  <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="bookDetailsForm.invalid">Add</button>
+                </form>
+                <div *ngIf="submitted" [@expand]>
+                  <h3>Adding your book to the library</h3>
+                  <mat-spinner></mat-spinner><h4>Submitting...</h4>
+                </div>
+              <!--  <div *ngIf="submitted" [@expand]>
+                  <h3>Your Submission</h3>
+                    <p>Book Name: {{submitted.bookname}}</p>
+                    <p>Book Language: {{submitted.booklanguage}}</p>
+                    <p>Book Description: {{submitted.bookdescription}}</p>
+                    <p>Book Owner Address: {{submitted.bookowneraddress}}</p>
+                    <p>Book Owner Contact Nr: {{submitted.bookownertelnum}}</p>
+                </div> -->
+        </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"></mat-expansion-panel>
+</mat-accordion>
+
+<!-- Add new book end -->
+
+<ng-template #loading>
+  <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+</ng-template>
+
+
+</div>

@@ -10,24 +10,23 @@
   </div>
 
   <div fxFlex>
-    <h3>Location Information</h3> 
+    <h3>Location Information</h3>
     <div fxLayout="column" fxLayout.gt-sm="row">
       <div fxFlex="50" fxFlexOffset="20px">
         <h4>Our Address</h4>
         <address>
-          121, Clear Water Bay Road<br>
-          Clear Water Bay, Kowloon<br>
-          HONG KONG<br>
-          <i class="fa fa-phone"></i>: +852 1234 5678<br>
-          <i class="fa fa-fax"></i>: +852 8765 4321<br>
-          <i class="fa fa-envelope"></i>: 
-                <a href="mailto:confusion@food.net">confusion@food.net</a>
+          288 Diamond Way<br>
+          Milpitas, CA 95035<br>
+          USA <br>
+          <i class="fa fa-phone"></i>: +1 669 333 1328<br>
+          <i class="fa fa-envelope"></i>:
+                <a href="mailto:patilkunal@gmail.com">patilkunal@gmail.com</a>
         </address>
         <p></p>
         <div>
-          <a mat-raised-button href="tel:+85212345678"><i class="fa fa-phone"></i> Call</a>
+          <a mat-raised-button href="tel:+16693331328"><i class="fa fa-phone"></i> Call</a>
           <a mat-raised-button><i class="fa fa-skype"></i> Skype</a>
-          <a mat-raised-button href="mailto:confusion@food.net"><i class="fa fa-envelope-o"></i> Email</a>
+          <a mat-raised-button href="mailto:patilkunal@gmail.com"><i class="fa fa-envelope-o"></i> Email</a>
         </div>
         </div>
       <div fxFlex="40">
@@ -35,10 +34,12 @@
       </div>
     </div>
   </div>
+  <hr>
 
   <div fxFlex fxFlexOffset="20px" class="form-size">
     <h3>Send us your Feedback</h3>
-    <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
+
+    <!-- <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p> -->
 
     <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()" *ngIf="showForm" [@expand]>
       <p>
@@ -76,11 +77,16 @@
       <p>
         <mat-form-field class="full-width">
           <textarea matInput formControlName="message" placeholder="Your Feedback" rows=12></textarea>
+          <mat-slider min="1" max="5" step="1" thumbLabel tickInterval="1" name="rating" formControlName="rating"></mat-slider>
         </mat-form-field>
+
+    <!--  <mat-slider min="1" max="5" step="1" thumbLabel tickInterval="1" name="rating" formControlName="rating"></mat-slider> -->
+
       </p>
       <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="feedbackForm.invalid">Submit</button>
     </form>
-    <div [hidden]="showForm || submitted" [@expand]>
+
+    <!-- <div [hidden]="showForm || submitted" [@expand]>
       <h3>Submitting Form</h3>
       <mat-spinner></mat-spinner>
     </div>
@@ -93,6 +99,11 @@
         <p>Contact You?: {{submitted.agree}}</p>
         <p>How?: {{submitted.contacttype}}</p>
         <p>Feedback: {{submitted.message}}</p>
-    </div>
+    </div> -->
   </div>
+  <div *ngIf="submitted" [@expand]>
+      <mat-spinner></mat-spinner><h4>Submitting the feedback..</h4>
+  </div>
+
+
 </div>

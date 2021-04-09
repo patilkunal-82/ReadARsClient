@@ -1,11 +1,47 @@
+
 <div class="container"
      fxLayout="row"
      fxLayout.sm="column"
      fxLayout.xs="column"
      fxLayoutAlign.gt-md="space-around center"
      fxLayoutGap="10px">
+ <hr>
+   <mat-card justify-content: center>
+    <mat-card-header>
+      <div mat-card-avatar></div>
+      <mat-card-title>
+        <h2> ReadARs Home library - Books from my home to yours !</h2>
+      </mat-card-title>
+    </mat-card-header>
+    <img src="/assets/images/homelibrary.jpeg" height=450 width=612>
+    </mat-card>
 
-<mat-card *ngIf="dish" fxFlex [@expand]>
+
+
+  <div fxFlex *ngIf="feedbacks || feedbackErrMess; else loading" [@expand]>
+    <mat-card *ngFor="let feedback of feedbacks" class="feedback-card">
+      <mat-card-header>
+        <div mat-card-avatar></div>
+        <mat-card-title>
+          <h4><p>{{feedback.message}}</p></h4>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content style="text-align: right;">
+        <p> -- {{feedback.firstname}} {{feedback.lastname}}, {{feedback.createdAt | date }} </p>
+      </mat-card-content>
+    </mat-card>
+    <div *ngIf="feedbackErrMess">
+      <h2>Error</h2>
+      <h4>{{feedbackErrMess}}</h4>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<!-- <mat-card *ngIf="dish" fxFlex [@expand]>
   <mat-card-header>
     <div mat-card-avatar></div>
     <mat-card-title>
@@ -24,9 +60,9 @@
 <div *ngIf="dishErrMess">
   <h2>Error</h2>
   <h4>{{dishErrMess}}</h4>
-</div>
+</div> -->
 
-<mat-card *ngIf="promotion" fxFlex [@expand]>
+<!-- <mat-card *ngIf="promotion" fxFlex [@expand]>
   <mat-card-header>
     <div mat-card-avatar></div>
     <mat-card-title>
@@ -45,13 +81,13 @@
 <div *ngIf="promoErrMess">
   <h2>Error</h2>
   <h4>{{promoErrMess}}</h4>
-</div>
+</div> -->
 
-<mat-card *ngIf="leader" fxFlex [@expand]>
+<!-- <mat-card *ngIf="leader" fxFlex [@expand]>
   <mat-card-header>
     <div mat-card-avatar></div>
     <mat-card-title>
-      <h3>{{leader.name | uppercase}} {{leader.abbr}}</h3>
+      <h3>{{leader.name | uppercase}} </h3>
     </mat-card-title>
   </mat-card-header>
   <img mat-card-image src="{{ baseURL + leader.image }}" alt={{leader.name}}>
@@ -67,5 +103,4 @@
 <div *ngIf="leaderErrMess">
   <h2>Error</h2>
   <h4>{{leaderErrMess}}</h4>
-</div>
-</div>
+</div> -->

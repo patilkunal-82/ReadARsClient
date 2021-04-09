@@ -1,0 +1,242 @@
+<div class="container"
+    fxLayout="row wrap"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutAlign.gt-md="space-around center"
+    fxLayoutGap="10px"
+    fxLayoutGap.xs="0">
+
+
+  <div fxFlex="100" *ngIf="book" [@visibility]="visibility" [@expand]>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="fa fa-book fa-3x" style="text-align: right;"></span>
+        <p> Book Name :{{book.bookname | uppercase}}
+        </p>
+        <p> Book Description: {{book.bookdescription}}
+        </p>
+        <p> Book Owner: {{book.bookowner.firstname}} {{book.bookowner.lastname}}
+        </p>
+        <p> Book Owner's Rating: {{book.bookrating}}
+        </p>
+        <p> Book Owner's Address: {{book.bookowneraddress}}
+        </p>
+        <p> Book Owner Email: {{book.bookowner.email}}
+        </p>
+        <p> Book Owner Telephone : {{book.bookownertelnum}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions style="text-align: center;">
+        <button mat-button [routerLink]="['/bookdetail', prev]"><span class="fa fa-chevron-left fa-lg" title="Previous"></span></button>
+        <button mat-button (click)="goBack()"><span class="fa fa-arrow-left fa-lg" title="Go Back"></span></button>
+        <!-- <button mat-button (click)="reserveBook()"><span class="{{reserved ? '' :  '' }}"></span></button> -->
+        <button mat-button *ngIf="reserved">NOT AVAILABLE</button>
+        <button mat-button (click)="reserveBook()" *ngIf="!reserved">Reserve</button>
+        <button mat-button>
+          <a mat-icon-button class="btn-mail" href="mailto:{{book.bookowner.email}}"><i class="fa fa-envelope-o fa-lg" title="Contact Book Owner"></i></a>
+        </button>
+        <button mat-button>
+          <a mat-icon-button href="tel:{{book.bookownertelnum}}"><i class="fa fa-phone"></i></a>
+        </button>
+        <span class="flex-spacer"></span>
+        <button mat-button [routerLink]="['/bookdetail', next]"><span class="fa fa-chevron-right fa-lg" title="Next"></span></button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <hr>
+
+  <div fxFlex="100" *ngIf="book" [@visibility]="visibility" [@expand]>
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title><h3> Browse readers' comments on this book </h3></mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <h4>Readers' Comments on this book</h4>
+          <mat-list-item *ngFor="let comment of book.comments">
+            <h4 matLine> {{comment.comment}} </h4>
+            <p matLine> {{comment.rating}} Stars</p>
+            <p matLine>
+              <span> -- {{comment.author.firstname}} {{comment.author.lastname}} -- {{comment.updatedAt | date }} </span>
+            </p>
+          </mat-list-item>
+        </mat-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"></mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div [hidden]="book || errMess">
+      <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  <div *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
+  <hr>
+
+  <div fxFlex="100" *ngIf="book" [@visibility]="visibility" [@expand]>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+          <mat-panel-title><h3> Post your rating, review </h3></mat-panel-title>
+      </mat-expansion-panel-header>
+          <div fxFlex fxFlexOffset="20px" class="form-size">
+            <form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+              <p>
+                <mat-slider min="1" max="5" step="1" thumbLabel tickInterval="1" name="rating" formControlName="rating"></mat-slider>
+                <mat-form-field class="full-width">
+                  <textarea matInput formControlName="comment" placeholder="Your Comment" rows=12></textarea>
+                  <mat-error *ngIf="formErrors.comment">{{formErrors.comment}}</mat-error>
+                </mat-form-field>
+              </p>
+              <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
+            </form>
+          </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"></mat-expansion-panel>
+  </mat-accordion>
+  </div>
+  <hr>
+
+</div>
+
+<!--  <div fxFlex="100" *ngIf="book" [@visibility]="visibility" [@expand]>
+    <mat-list>
+      <h4>Readers' Comments on this book</h4>
+      <mat-list-item *ngFor="let comment of book.comments">
+        <h4 matLine> {{comment.comment}} </h4>
+        <p matLine> {{comment.rating}} Stars</p>
+        <p matLine>
+          <span> -- {{comment.author.firstname}} {{comment.author.lastname}} -- {{comment.updatedAt | date }} </span>
+        </p>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div [hidden]="book || errMess">
+      <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  <div *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div> -->
+
+  <!--<div fxFlex="" *ngIf="book" [@visibility]="visibility" [@expand]>
+    <form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+      <p>
+        <mat-slider min="1" max="5" step="1" thumbLabel tickInterval="1" name="rating" formControlName="rating"></mat-slider>
+        <mat-form-field class="full-width">
+          <textarea matInput formControlName="comment" placeholder="Your Comment" rows=12></textarea>
+          <mat-error *ngIf="formErrors.comment">{{formErrors.comment}}</mat-error>
+        </mat-form-field>
+      </p>
+      <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
+    </form>
+  </div>
+  <div [hidden]="book || errMess">
+      <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  <div *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container"
+    fxLayout="row wrap"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutAlign.gt-md="space-around center"
+    fxLayoutGap="10px"
+    fxLayoutGap.xs="0">
+
+  <div fxFlex="100">
+    <div>
+      <h3 *ngIf="dish">{{dish.name | uppercase}}</h3>
+      <hr>
+    </div>
+  </div>
+
+  <div fxFlex="40" *ngIf="dish" [@visibility]="visibility" [@expand]>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>{{dish.name | uppercase}}</h3>
+        </mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{ baseURL + dish.image}}" alt={{dish.name}}>
+      <mat-card-content>
+        <p>{{dish.description}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button [routerLink]="['/dishdetail', prev]"><span class="fa fa-chevron-left fa-lg"></span></button>
+        <button mat-button (click)="goBack()"><span class="fa fa-arrow-left fa-lg"></span></button>
+        <button mat-button (click)="addToFavorites()"><span class="{{favorite ? 'fa fa-heart fa-lg' : 'fa fa-heart-o fa-lg'}}"></span></button>
+        <button mat-button><span class="fa fa-share fa-lg"></span></button>
+        <span class="flex-spacer"></span>
+        <button mat-button [routerLink]="['/dishdetail', next]"><span class="fa fa-chevron-right fa-lg"></span></button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div fxFlex="40" *ngIf="dish" [@visibility]="visibility" [@expand]>
+    <mat-list>
+      <h3>Comments</h3>
+      <mat-list-item *ngFor="let comment of dish.comments">
+        <h4 matLine> {{comment.comment}} </h4>
+        <p matLine> {{comment.rating}} Stars</p>
+        <p matLine>
+          <span> -- {{comment.author.firstname}} {{comment.author.lastname}} -- {{comment.updatedAt | date }} </span>
+        </p>
+      </mat-list-item>
+    </mat-list>
+    <form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+      <p>
+        <mat-slider min="1" max="5" step="1" thumbLabel tickInterval="1" name="rating" formControlName="rating"></mat-slider>
+        <mat-form-field class="full-width">
+          <textarea matInput formControlName="comment" placeholder="Your Comment" rows=12></textarea>
+          <mat-error *ngIf="formErrors.comment">{{formErrors.comment}}</mat-error>
+        </mat-form-field>
+      </p>
+      <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
+    </form>
+  </div>
+  <div [hidden]="dish || errMess">
+      <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  <div *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
+</div> -->

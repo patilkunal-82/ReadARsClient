@@ -5,12 +5,11 @@
 </mat-toolbar>
 
 <div *ngIf="errMess">
-  <h2>Error</h2>
-  <h4>{{errMess}}</h4>
+  <h4 style="color: red;">{{errMess}}</h4>
+
 </div>
 
 <form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
-
   <mat-dialog-content>
     <p>
       <mat-form-field>
@@ -26,7 +25,9 @@
   </mat-dialog-content>
   <mat-dialog-actions>
     <span class="flex-spacer"></span>
+
     <button mat-button mat-dialog-close>Cancel</button>
-    <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="loginForm.form.invalid">Login</button>
+    <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="loginForm.form.invalid" color="white">Login</button>
   </mat-dialog-actions>
+  <a mat-button (click)="openSignupForm()"><h3 style="color: green;"> Not a member ? Sign Up !</h3></a>
 </form>

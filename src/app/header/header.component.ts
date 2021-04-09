@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { LoginComponent } from '../login/login.component';
+import { SignupComponent } from '../signup/signup.component';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
@@ -36,8 +37,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
         });
     }
 
+    openSignupForm() {
+      const signupRef = this.dialog.open(SignupComponent, {width: '500px', height: '450px'});
+
+      signupRef.afterClosed()
+        .subscribe(result => {
+          console.log(result);
+        });
+    }
+
+
+
     logOut() {
       this.username = undefined;
       this.authService.logOut();
+
     }
 }

@@ -1,3 +1,15 @@
+
+$lt-gray: #ddd;
+//$background-dark: #3F51B5;
+//$background-light: #7986CB;
+//$background-pale: #C5CAE9;
+//$background-moredark: #1A237E;
+
+$background-pale: #C8E6C9;
+$background-light: #81C784;
+$background-dark: #4CAF50;
+$background-moredark: #1B5E20;
+
 table {
   width: 100%;
 }
@@ -20,6 +32,34 @@ td, th {
   display: none;
 }
 
-.flex-spacer-icons {
-  flex: 0.5 0.5 auto;
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+section {
+  display: table;
+}
+
+carousel {
+  height: 100%;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+[appSliderItem] {
+  flex-shrink: 0;
+}
+
+@mixin zero-margin($pad-up-down, $pad-left-right) {
+    margin: 0px auto;
+    padding: $pad-up-down $pad-left-right;
+}
+
+.jumbotron {
+    @include zero-margin(20px,20px);
+    background: $background-moredark;
+    color:white;
+    min-height: 50px;
 }

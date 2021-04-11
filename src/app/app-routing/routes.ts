@@ -12,6 +12,8 @@ export const routes: Routes = [
   { path: 'aboutus', component: AboutComponent },
   { path: 'booklist', component: BooklistComponent, canActivate: [AuthGuard] },
   { path: 'mybooks', component: MybooksComponent, canActivate: [AuthGuard] },
+  //{ path: 'booklist', component: BooklistComponent},
+  //{ path: 'mybooks', component: MybooksComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'contactus',     component: ContactComponent },
   { path: 'bookdetail/:id', component: BookdetailComponent }

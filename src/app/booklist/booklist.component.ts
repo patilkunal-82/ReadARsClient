@@ -9,6 +9,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
+import { CarouselComponent } from '../carousel/carousel.component';
+import { CarouselItemDirective } from '../carousel/carousel-item.directive';
+import { CarouselItemElementDirective } from '../carousel/carousel-item-element.directive';
 
 @Component({
   selector: 'app-booklist',
@@ -34,8 +37,10 @@ export class BooklistComponent implements OnInit, AfterViewInit {
   searchText: string;
 
 //  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
-  displayedColumns: string[] = ['bookname', 'booklanguage', 'bookdescription','bookrating', 'status'];
+  displayedColumns: string[] = ['bookname', 'booklanguage', 'bookauthor','bookdescription','status'];
   dataSource = new MatTableDataSource<Book>();
+
+
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

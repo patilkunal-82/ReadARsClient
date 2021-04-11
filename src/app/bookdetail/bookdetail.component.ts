@@ -80,7 +80,9 @@ export class BookdetailComponent implements OnInit {
     private fb: FormBuilder,
     private readarsService: ReadarsService,
     private reservedService: ReservedService,
-    @Inject('baseURL') private baseURL) { }
+    @Inject('baseURL') private baseURL) {
+
+    }
 
   ngOnInit() {
     this.createForm();
@@ -107,6 +109,7 @@ export class BookdetailComponent implements OnInit {
      this.bookIds = bookIds;
      this.storeBookIds(this.bookIds);
    }, errmess => this.errMess = <any>errmess);
+   this.lbookIds = this.loadBookIds();
    console.log("BookIds from getBookIds" + this.bookIds);
    console.log("BookIds from getBookIds" + this.bookIds);
     this.route.params.pipe(switchMap((params: Params) => {

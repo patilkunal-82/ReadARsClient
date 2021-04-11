@@ -9,6 +9,12 @@ import { Feedback } from '../shared/feedback';
 import { FeedbackService } from '../services/feedback.service';
 import { flyInOut, expand } from '../animations/app.animation';
 
+import { CarouselComponent } from '../carousel/carousel.component';
+import { CarouselItemDirective } from '../carousel/carousel-item.directive';
+import { CarouselItemElementDirective } from '../carousel/carousel-item-element.directive';
+
+//import { MatCarousel, MatCarouselComponent } from '@ngmodule/material-carousel';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -25,6 +31,7 @@ import { flyInOut, expand } from '../animations/app.animation';
 })
 export class HomeComponent implements OnInit {
 
+
   dish: Dish;
   promotion: Promotion;
   leader: Leader;
@@ -36,10 +43,20 @@ export class HomeComponent implements OnInit {
 
   feedbacks: Feedback[];
 
+
+
+  slides = [
+            {image: "/assets/images/finalimages/homeimage.jpeg"},
+            {image: "/assets/images/finalimages/searchandclick.jpeg"},
+            {image: "/assets/images/finalimages/reservethebook.jpeg"},
+            {image: "/assets/images/finalimages/contactownercollectstart.jpeg"},
+            {image: "/assets/images/finalimages/lendandmakeavailable.jpeg"},
+            {image: "/assets/images/finalimages/addandremove.jpeg"}];
+
   constructor(private dishservice: DishService,
     private promotionservice: PromotionService,
     private leaderservice: LeaderService,private feedbackservice: FeedbackService,
-    @Inject('baseURL') private baseURL) { }
+    @Inject('baseURL') private baseURL ) {}
 
   ngOnInit() {
     /*this.dishservice.getFeaturedDish()

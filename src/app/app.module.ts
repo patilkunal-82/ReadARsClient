@@ -6,7 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButtonModule, MatIconModule } from '@angular/material';
 import { MatDialogRef } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
@@ -23,14 +23,21 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
+
+//import { MatCarouselModule } from '@ngmodule/material-carousel';
+//import { NgbdCarouselBasic } from './carousel-basic';
+import { CarouselComponent } from './carousel/carousel.component';
+import { CarouselItemDirective } from './carousel/carousel-item.directive';
+import { CarouselItemElementDirective } from './carousel/carousel-item-element.directive';
 
 
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // search module
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
+//import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { AppComponent } from './app.component';
 
@@ -72,6 +79,9 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 
 
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +95,10 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
     LoginComponent,
     HighlightDirective,
     MybooksComponent,
-    SignupComponent
+    SignupComponent,
+    CarouselComponent,
+    CarouselItemDirective,
+    CarouselItemElementDirective
 
   ],
   imports: [
@@ -96,6 +109,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
+    MatIconModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
@@ -109,13 +123,16 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    Ng2SearchPipeModule,
+
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     MatExpansionModule,
     ScrollDispatchModule,
     CommonModule,
+    MatTooltipModule,
+    //MatCarouselModule.forRoot(),
+
   ],
   providers: [
     DishService,

@@ -1,4 +1,14 @@
 .feedback-card {
-  max-width: 600px;
-  margin: 4px
+  min-height:50px;
+  min-width:600px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+carousel {
+    height: 100%;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

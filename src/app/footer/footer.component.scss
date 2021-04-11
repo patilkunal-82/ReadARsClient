@@ -17,7 +17,7 @@ $background-moredark: #1B5E20;
 }
 
 .footer{
-    background-color: $background-moredark;
+    background-color: $background-dark;
     @include zero-margin(10px, 0px);
     color:floralwhite;
 }

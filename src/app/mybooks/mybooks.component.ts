@@ -18,6 +18,13 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatButtonModule, MatIconModule } from '@angular/material';
+
+import { CarouselComponent } from '../carousel/carousel.component';
+import { CarouselItemDirective } from '../carousel/carousel-item.directive';
+import { CarouselItemElementDirective } from '../carousel/carousel-item-element.directive';
+
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-mybooks',
@@ -35,6 +42,14 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class MybooksComponent implements OnInit, AfterViewInit {
 
+  items = [{ title: 'Slide 1' }, { title: 'Slide 2' }, { title: 'Slide 3' },{ title: 'Slide 4' }];
+//  slides = [{ image: "/assets/images/book-reader.png"}, {image: "/assets/images/createar.jpeg"},
+          //  { image: "/assets/images/enjoyar.jpeg"}, {image: "/assets/images/library.jpeg"}];
+
+//  slides = [{ image: "/assets/images/finalimages/lendandmakeavailable.jpeg"},
+          //  {image: "/assets/images/finalimages/addandremove.jpeg"}];
+
+  name = 'Angular';
   favorites: Favorite;
   delete: boolean;
   errMess: string;
@@ -70,7 +85,8 @@ export class MybooksComponent implements OnInit, AfterViewInit {
     'bookowneraddress':'',
     'bookdescription':'',
     'bookownertelnum':'',
-    'bookrating':''
+    'bookrating':'',
+    'bookauthor':''
   };
 
   validationMessages = {
@@ -90,6 +106,11 @@ export class MybooksComponent implements OnInit, AfterViewInit {
     'bookownertelnum': {
       'required':      'Contact number is required.',
       'pattern':       'Contact number must contain only numbers.'
+    },
+    'booauthor': {
+      'required':      'Author Name is required.',
+      'minlength':     'Author Name must be at least 1 character long.',
+      'maxlength':     'Author Name cannot be more than 40 characters long.'
     }
   };
 
@@ -176,9 +197,10 @@ export class MybooksComponent implements OnInit, AfterViewInit {
           bookname: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(40)] ],
           booklanguage: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
           bookowneraddress: ['', [Validators.required]],
-          bookdescription: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)] ],
+          bookdescription: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)] ],
           bookownertelnum:['', [Validators.required, Validators.pattern] ],
-          bookrating: '5'
+          bookrating: '5',
+          bookauthor: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(200)] ]
         });
         this.bookDetailsForm.valueChanges
         .subscribe(data => this.onValueChanged(data));

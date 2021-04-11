@@ -5,38 +5,68 @@
      fxLayout.xs="column"
      fxLayoutAlign.gt-md="space-around center"
      fxLayoutGap="10px">
- <hr>
-   <mat-card justify-content: center>
-    <mat-card-header>
-      <div mat-card-avatar></div>
-      <mat-card-title>
-        <h2> ReadARs Home library - Books from my home to yours !</h2>
-      </mat-card-title>
-    </mat-card-header>
-    <img src="/assets/images/homelibrary.jpeg" height=450 width=612>
-    </mat-card>
-
-
-
-  <div fxFlex *ngIf="feedbacks || feedbackErrMess; else loading" [@expand]>
-    <mat-card *ngFor="let feedback of feedbacks" class="feedback-card">
-      <mat-card-header>
-        <div mat-card-avatar></div>
-        <mat-card-title>
-          <h4><p>{{feedback.message}}</p></h4>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content style="text-align: right;">
-        <p> -- {{feedback.firstname}} {{feedback.lastname}}, {{feedback.createdAt | date }} </p>
-      </mat-card-content>
-    </mat-card>
-    <div *ngIf="feedbackErrMess">
-      <h2>Error</h2>
-      <h4>{{feedbackErrMess}}</h4>
-    </div>
-  </div>
-
 </div>
+
+<carousel>
+  <ng-container *ngFor="let slide of slides">
+    <ng-container *carouselItem>
+      <!--<div class="slide">{{ slide.title }}</div> -->
+    <!--  <img src="/assets/images/book-reader.png" height=30 width=41> -->
+      <img src="{{slide.image}}" height=652 width=1200>
+    </ng-container>
+  </ng-container>
+</carousel>
+
+<div class="container"
+     fxLayout="row"
+     fxLayout.sm="column"
+     fxLayout.xs="column"
+     fxLayoutAlign.gt-md="space-around center"
+     fxLayoutGap="10px">
+     <h2 style="color: green;"> And our users say...</h2>
+</div>
+<carousel>
+  <ng-container *ngFor="let feedback of feedbacks">
+    <ng-container *carouselItem>
+      <mat-card class="feedback-card">
+        <mat-card-header>
+          <mat-card-title>
+          </mat-card-title>
+          <mat-card-content>
+              <span style="text-align: right;"></span>
+              <h3 style="color: green;"> {{feedback.message}}</h3>
+              <p> -- {{feedback.firstname}} {{feedback.lastname}}, {{feedback.createdAt | date }} </p>
+          </mat-card-content>
+        </mat-card-header>
+      </mat-card>
+      <!--<h3>{{feedback.message}}</h3>
+      <p> -- {{feedback.firstname}} {{feedback.lastname}}, {{feedback.createdAt | date }} </p> -->
+    </ng-container>
+  </ng-container>
+</carousel>
+<div *ngIf="feedbackErrMess">
+  <h2>Error</h2>
+  <h4>{{feedbackErrMess}}</h4>
+</div>
+
+<!--<div *ngIf="feedbacks || feedbackErrMess; else loading" [@expand]>
+  <h4 style>Customer Testimonials...</h4>
+   <mat-card *ngFor="let feedback of feedbacks" class="feedback-card">
+     <mat-card-header>
+       <div mat-card-avatar></div>
+       <mat-card-title>
+       </mat-card-title>
+     </mat-card-header>
+     <mat-card-content style="text-align: right;">
+       <h3>{{feedback.message}}</h3>
+       <p> -- {{feedback.firstname}} {{feedback.lastname}}, {{feedback.createdAt | date }} </p>
+     </mat-card-content>
+   </mat-card>
+   <div *ngIf="feedbackErrMess">
+     <h2>Error</h2>
+     <h4>{{feedbackErrMess}}</h4>
+   </div>
+ </div> -->
 
 
 

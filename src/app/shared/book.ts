@@ -6,6 +6,7 @@ export class Book {
     booklanguage: string;
     bookdescription: string;
     bookowner: User;
+    bookauthor: string;
     bookowneraddress: string;
     bookownertelnum: string;
     bookrating: string;
@@ -14,4 +15,5 @@ export class Book {
     bookborrowed: boolean;
 }
 
-export const BookLanguage = ['English', 'Hindi', 'Marathi', 'German', 'Tamil', 'Spanish', 'French'];
+export const BookLanguage = ['English', 'Hindi', 'Marathi', 'German', 'Tamil',
+                             'Spanish', 'French', 'Telugu', 'Latin', 'Malyalam'];

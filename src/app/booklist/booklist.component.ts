@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject, AfterViewInit, ViewChild } from '@angular/core';
-import { Dish } from '../shared/dish';
-import { DishService } from '../services/dish.service';
+
 import { Book } from '../shared/book';
 import { BooksService } from '../services/books.service';
 import { ReadarsService } from '../services/readars.service';
@@ -30,10 +29,10 @@ import { CarouselItemElementDirective } from '../carousel/carousel-item-element.
 export class BooklistComponent implements OnInit, AfterViewInit {
 
   books: Book[];
-  dishes: Dish[];
+
   errMess: string;
   showForm = true;
-  selectedDish: Dish;
+
   searchText: string;
 
 //  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
@@ -45,16 +44,16 @@ export class BooklistComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private dishService: DishService, private booksService: BooksService,
+  constructor(private booksService: BooksService,
     private readarsService: ReadarsService, @Inject('baseURL') private baseURL) {
 
    }
 
   ngOnInit() {
     this.showForm = false;
-    this.dishService.getDishes()
+   /*this.dishService.getDishes()
       .subscribe(dishes => this.dishes = dishes,
-        errmess => this.errMess = <any>errmess);
+        errmess => this.errMess = <any>errmess);*/
     /*this.booksService.getBooks()
       .subscribe(books => this.books = books,
         errmess => this.errMess = <any>errmess);*/
@@ -86,8 +85,8 @@ export class BooklistComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onSelect(dish: Dish) {
+  /*onSelect(dish: Dish) {
     this.selectedDish = dish;
-  }
+  }*/
 
 }

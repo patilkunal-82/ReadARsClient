@@ -45,8 +45,7 @@ import 'hammerjs';
 import { BooklistComponent } from './booklist/booklist.component';
 import { BookdetailComponent } from './bookdetail/bookdetail.component';
 
-import { DishService } from './services/dish.service';
-import { PromotionService } from './services/promotion.service';
+
 import { LeaderService } from './services/leader.service';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { FeedbackService } from './services/feedback.service';
@@ -135,8 +134,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 
   ],
   providers: [
-    DishService,
-    PromotionService,
+    
     LeaderService,
     {provide: 'baseURL', useValue: baseURL},
     ProcessHTTPMsgService,

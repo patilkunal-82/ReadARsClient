@@ -1,8 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Dish } from '../shared/dish';
-import { DishService } from '../services/dish.service';
-import { Promotion } from '../shared/promotion';
-import { PromotionService } from '../services/promotion.service';
+
 import { Leader } from '../shared/leader';
 import { LeaderService } from '../services/leader.service';
 import { Feedback } from '../shared/feedback';
@@ -32,11 +29,11 @@ import { CarouselItemElementDirective } from '../carousel/carousel-item-element.
 export class HomeComponent implements OnInit {
 
 
-  dish: Dish;
-  promotion: Promotion;
+
+
   leader: Leader;
-  dishErrMess: string;
-  promoErrMess: string;
+
+
   leaderErrMess: string;
   feedback: Feedback;
   feedbackErrMess: string;
@@ -53,8 +50,8 @@ export class HomeComponent implements OnInit {
             {image: "/assets/images/finalimages/lendandmakeavailable.jpeg"},
             {image: "/assets/images/finalimages/addandremove.jpeg"}];
 
-  constructor(private dishservice: DishService,
-    private promotionservice: PromotionService,
+  constructor(
+    
     private leaderservice: LeaderService,private feedbackservice: FeedbackService,
     @Inject('baseURL') private baseURL ) {}
 

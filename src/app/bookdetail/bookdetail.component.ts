@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { visibility, flyInOut, expand } from '../animations/app.animation';
-import { Dish } from '../shared/dish';
+
 import { Book } from '../shared/book';
 import { Comment } from '../shared/comment';
-import { DishService } from '../services/dish.service';
+
 import { ReadarsService } from '../services/readars.service';
 import { FavoriteService } from '../services/favorite.service';
 import { ReservedService } from '../services/reserved.service';
@@ -35,15 +35,15 @@ import { switchMap } from 'rxjs/operators';
 export class BookdetailComponent implements OnInit {
 
   @ViewChild('cform') commentFormDirective;
-  dish: Dish;
+
   book: Book;
   clientBook: Book;
   books: Book[];
 
-  dishcopy: Dish;
+
   bookcopy: Book;
 
-  dishIds: string[];
+
   bookIds: string[];
   lbookIds: string[];
 
@@ -73,7 +73,7 @@ export class BookdetailComponent implements OnInit {
 
   commentForm: FormGroup;
 
-  constructor(private dishservice: DishService,
+  constructor(
     private favoriteService: FavoriteService,
     private route: ActivatedRoute,
     private location: Location,
@@ -210,12 +210,12 @@ export class BookdetailComponent implements OnInit {
     }
   }
 
-  addToFavorites() {
+  /*addToFavorites() {
     if (!this.favorite) {
       this.favoriteService.postFavorite(this.dish._id)
         .subscribe(favorites => { console.log(favorites); this.favorite = true; });
     }
-  }
+  }*/
 
   reserveBook() {
     console.log("inside reserveBook of BookdetailComponent.ts");

@@ -53,7 +53,7 @@ fxLayout="column"
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-          [routerLink]="['/bookdetail', row._id]" appHighlight title="Click for more details"></tr>
+          [routerLink]="['/bookdetail', row._id]" appHighlight></tr>
           <tr class="mat-row" *matNoDataRow>
            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
           </tr>

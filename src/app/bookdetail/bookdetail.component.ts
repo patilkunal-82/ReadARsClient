@@ -9,7 +9,7 @@ import { ReadarsService } from '../services/readars.service';
 import { FavoriteService } from '../services/favorite.service';
 import { ReservedService } from '../services/reserved.service';
 
-import { Params, ActivatedRoute } from '@angular/router';
+import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import {VERSION} from '@angular/material';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
@@ -80,7 +80,7 @@ export class BookdetailComponent implements OnInit {
     private fb: FormBuilder,
     private readarsService: ReadarsService,
     private reservedService: ReservedService,
-    @Inject('baseURL') private baseURL) {
+    @Inject('baseURL') private baseURL, private router: Router) {
 
     }
 
@@ -130,6 +130,7 @@ export class BookdetailComponent implements OnInit {
     errmess => this.errMess = <any>errmess);
   }
 
+
   setPrevNext(bookId: string) {
 
     console.log("Into setPreNext");
@@ -156,7 +157,8 @@ export class BookdetailComponent implements OnInit {
   }
 
   goBack(): void {
-    this.location.back();
+    //this.location.back();
+    this.router.navigateByUrl('/booklist');
   }
 
   createForm() {

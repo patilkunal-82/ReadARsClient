@@ -32,7 +32,7 @@
       </mat-card-content>
       <mat-card-actions style="text-align: center;">
         <button mat-button [routerLink]="['/bookdetail', prev]"><span class="fa fa-chevron-left fa-lg" title="Previous"></span></button>
-        <button mat-button (click)="goBack()"><span class="fa fa-arrow-left fa-lg" title="Go Back"></span></button>
+        <button mat-button (click)="goBack()"><span title="Go Back">BACK</span></button>
         <!-- <button mat-button (click)="reserveBook()"><span class="{{reserved ? '' :  '' }}"></span></button> -->
         <button mat-button *ngIf="reserved">NOT AVAILABLE</button>
         <button mat-button (click)="reserveBook()" *ngIf="!reserved">Reserve</button>

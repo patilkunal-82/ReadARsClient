@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef} from '@angular/material';
 import { AuthService } from '../services/auth.service';
 import { SignupComponent } from '../signup/signup.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
 
 
   constructor(public dialogRef: MatDialogRef<LoginComponent>, public dialog: MatDialog,
-    private authService: AuthService) { }
+    private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
       .subscribe(res => {
         if (res.success) {
           this.dialogRef.close(res.success);
+          this.router.navigateByUrl('/booklist');
         } else {
           console.log(res);
         }
@@ -35,6 +37,7 @@ export class LoginComponent implements OnInit {
         console.log(error);
         this.errMess = error;
       });
+
   }
 
   openSignupForm() {

@@ -15,19 +15,19 @@
       </mat-card-header>
       <mat-card-content>
         <span class="fa fa-book fa-3x" style="text-align: right;"></span>
-        <p> Book Name :{{book.bookname | uppercase}}
+        <p> Book Name :{{book?.bookname | uppercase}}
         </p>
-        <p> Book Description: {{book.bookdescription}}
+        <p> Book Description: {{book?.bookdescription}}
         </p>
-        <p> Book Owner: {{book.bookowner.firstname}} {{book.bookowner.lastname}}
+        <p> Book Owner: {{book?.bookowner.firstname}} {{book.bookowner.lastname}}
         </p>
-        <p> Book Owner's Rating: {{book.bookrating}}
+        <p> Book Owner's Rating: {{book?.bookrating}}
         </p>
-        <p> Book Owner's Address: {{book.bookowneraddress}}
+        <p> Book Owner's Address: {{book?.bookowneraddress}}
         </p>
-        <p> Book Owner Email: {{book.bookowner.email}}
+        <p> Book Owner Email: {{book?.bookowner.email}}
         </p>
-        <p> Book Owner Telephone : {{book.bookownertelnum}}
+        <p> Book Owner Telephone : {{book?.bookownertelnum}}
         </p>
       </mat-card-content>
       <mat-card-actions style="text-align: center;">
